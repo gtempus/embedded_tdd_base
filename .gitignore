@@ -1,4 +1,9 @@
 *~
+*.o
 LedDriver_CppUTest_tests
 lib/
 objs/
+
+*.elf
+*.hex
+*.map

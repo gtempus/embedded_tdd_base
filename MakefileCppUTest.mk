@@ -23,7 +23,7 @@ TEST_SRC_DIRS = \
 INCLUDE_DIRS =\
   .\
   $(CPPUTEST_HOME)/include\
-  $(PROJECT_HOME_DIR)/include/LedDriver\
+  $(PROJECT_HOME_DIR)/include\
 
 #CPPUTEST_WARNINGFLAGS += -pedantic-errors -Wconversion -Wshadow  -Wextra
 CPPUTEST_WARNINGFLAGS += -Wall -Werror -Wswitch-default -Wswitch-enum 
