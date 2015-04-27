@@ -3,7 +3,7 @@
 // ------- Preamble -------- //
 #include <avr/io.h>                        /* Defines pins, ports, etc */
 #include <util/delay.h>                     /* Functions to waste time */
-
+#include "LedDriver/LedDriver.h"
 
 int main(void) {
 
@@ -11,7 +11,7 @@ int main(void) {
   DDRB |= 0b0000001;            /* Data Direction Register B:
                                    writing a one to the bit
                                    enables output. */
-
+  LedDriver_Create(&PORTB);
   // ------ Event loop ------ //
   while (1) {
 
