@@ -5,9 +5,11 @@ extern "C"
 
 #include "CppUTest/TestHarness.h"
 
+uint8_t virtualLeds = 0xff;
+
 TEST_GROUP(LedDriver) {
   void setup() {
-    LedDriver_Create();
+    LedDriver_Create(&virtualLeds);    
   }
 
   void teardown() {
@@ -16,6 +18,6 @@ TEST_GROUP(LedDriver) {
 };
 
 TEST(LedDriver, Create) {
-  FAIL("Start here");
+  BYTES_EQUAL(0x00, virtualLeds);
 }
 
