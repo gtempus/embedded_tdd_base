@@ -2,6 +2,9 @@ all:
 	make -f MakefileCppUTest.mk
 	make -f MakefileAVR.mk all
 
+test:
+	make -f MakefileCppUTest.mk
+
 flash:
 	make -f MakefileAVR.mk flash
 

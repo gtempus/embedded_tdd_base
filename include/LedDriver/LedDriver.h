@@ -6,4 +6,6 @@
 void LedDriver_Create(volatile uint8_t *data_register);
 void LedDriver_Destroy(void);
 
+void LedDriver_TurnOn(int led);
+void LedDriver_TurnOff(int led);
 #endif  /* D_LedDriver_H */
