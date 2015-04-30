@@ -17,12 +17,14 @@ SRC_DIRS = \
 	$(PROJECT_HOME_DIR)/src/LedDriver \
 
 TEST_SRC_DIRS = \
+	mocks\
 	tests\
 	tests/*\
 
 INCLUDE_DIRS =\
   .\
   $(CPPUTEST_HOME)/include\
+  $(PROJECT_HOME_DIR)/mocks\
   $(PROJECT_HOME_DIR)/include\
 
 #CPPUTEST_WARNINGFLAGS += -pedantic-errors -Wconversion -Wshadow  -Wextra

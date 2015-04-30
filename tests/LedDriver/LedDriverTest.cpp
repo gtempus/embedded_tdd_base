@@ -1,6 +1,7 @@
 extern "C"
 {
 #include "LedDriver/LedDriver.h"
+#include "mocks/RuntimeErrorStub.h"
 }
 
 #include "CppUTest/TestHarness.h"
@@ -49,4 +50,39 @@ TEST(LedDriver, TurnOffAnyLed) {
 TEST(LedDriver, TurnAllOn) {
   LedDriver_TurnAllOn();
   BYTES_EQUAL(0b11111111, virtualLeds);
+}
+
+TEST(LedDriver, UpperAndLowerBounds) {
+  LedDriver_TurnOn(1);
+  LedDriver_TurnOn(8);
+  BYTES_EQUAL(0b10000001, virtualLeds);
+}
+
+TEST(LedDriver, OutOfBoundsTurnOnDoesNoHarm) {
+  LedDriver_TurnOn(-1);
+  LedDriver_TurnOn(0);
+  LedDriver_TurnOn(9);
+  LedDriver_TurnOn(3141);
+  BYTES_EQUAL(0b00000000, virtualLeds);
+}
+
+TEST(LedDriver, OutOfBoundsTurnOffDoesNoHarm) {
+  LedDriver_TurnAllOn();
+  LedDriver_TurnOff(-1);
+  LedDriver_TurnOff(0);
+  LedDriver_TurnOff(9);
+  LedDriver_TurnOff(3141);
+  BYTES_EQUAL(0b11111111, virtualLeds);
+}
+
+TEST(LedDriver, OutOfBoundsTurnOnProducesRuntimeError) {
+  LedDriver_TurnOn(-1);
+  STRCMP_EQUAL("LED Driver: out-of-bounds LED", RuntimeErrorStub_GetLastError());
+  LONGS_EQUAL(-1, RuntimeErrorStub_GetLastParameter());
+}
+
+TEST(LedDriver, OutOfBoundsTurnOffProducesRuntimeError) {
+  LedDriver_TurnOff(9);
+  STRCMP_EQUAL("LED Driver: out-of-bounds LED", RuntimeErrorStub_GetLastError());
+  LONGS_EQUAL(9, RuntimeErrorStub_GetLastParameter());
 }

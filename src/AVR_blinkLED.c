@@ -4,7 +4,12 @@
 #include <avr/io.h>             /* Defines pins, ports, etc */
 #include <util/delay.h>         /* Functions to waste time */
 
+#include "util/RuntimeError.h"
 #include "LedDriver/LedDriver.h"
+
+void RuntimeError(const char* m, int p, const char* f, int l) {
+  return; //need to log this!
+}
 
 int main(void) {
   // -------- Inits --------- //
