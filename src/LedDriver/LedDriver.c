@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "LedDriver/LedDriver.h"
 #include "util/RuntimeError.h"
 
@@ -17,16 +18,20 @@ void LedDriver_TurnAllOn(void) {
   *ledsAddress = ALL_LEDS_ON;
 }
 
+void LedDriver_TurnAllOff(void) {
+  *ledsAddress = ALL_LEDS_OFF;
+}
+
 static uint8_t convertLedNumberToBit(int led) {
   return 1 << (led - 1);
 }
 
-static int outOfBounds(int led) {
+static bool outOfBounds(int led) {
   if (led <= 0 || led > 8) {
     RUNTIME_ERROR("LED Driver: out-of-bounds LED", led);
-    return 1;
+    return true;
   }
-  return 0;
+  return false;
 }
 
 void LedDriver_TurnOn(int led) {

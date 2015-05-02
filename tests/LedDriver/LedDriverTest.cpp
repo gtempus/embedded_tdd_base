@@ -52,6 +52,12 @@ TEST(LedDriver, TurnAllOn) {
   BYTES_EQUAL(0b11111111, virtualLeds);
 }
 
+TEST(LedDriver, TurnAllOff) {
+  LedDriver_TurnAllOn();
+  LedDriver_TurnAllOff();
+  BYTES_EQUAL(0b00000000, virtualLeds);
+}
+
 TEST(LedDriver, UpperAndLowerBounds) {
   LedDriver_TurnOn(1);
   LedDriver_TurnOn(8);
